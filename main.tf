@@ -1,5 +1,5 @@
 provider "azurerm" {
-  version = "=1.44.0"
+   version = "=1.44.0"
 }
 
 resource "azurerm_resource_group" "myresourcegroup" {
@@ -95,8 +95,14 @@ resource "azurerm_virtual_machine" "catapp" {
   resource_group_name = azurerm_resource_group.myresourcegroup.name
   vm_size             = var.vm_size
 
+
   network_interface_ids         = [azurerm_network_interface.catapp-nic.id]
   delete_os_disk_on_termination = "true"
+
+  tags = {
+    Department = "devops",
+    Billable = "true"
+  }
 
   storage_image_reference {
     publisher = var.image_publisher
